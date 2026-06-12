@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuru99 — Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f7f9f6;
+      --bg-hero:   #f0f5ee;
+      --border:    #d4e0cf;
+      --border-sub:#e4ede1;
+      --text:      #1e2a1b;
+      --text-sub:  #5a6657;
+      --text-muted:#8a9e86;
+      --accent:    #4a8a42;
+      --accent-dim:#6a9462;
+      --chip-bg:   #eaf3e7;
+      --chip-border:#b8d4b2;
+      --chip-text: #4a7a44;
+      --card-bg:   #f7f9f6;
+      --card-hover:#eef5ec;
+      --font-sans: 'Helvetica Neue', Arial, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── LAYOUT ── */
+    .wrap { max-width: 720px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg-hero);
+      border-bottom: 0.5px solid var(--border);
+      padding: 5rem 2.5rem 3.5rem;
+    }
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-size: clamp(2.25rem, 6vw, 3rem);
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-desc {
+      font-size: 0.9375rem;
+      color: var(--text-sub);
+      max-width: 480px;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 0.5px solid var(--chip-border);
+      color: var(--chip-text);
+      background: var(--chip-bg);
+    }
+
+    /* ── SECTION ── */
+    .section { padding: 2.5rem 2.5rem; }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── PROJECTS ── */
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border-sub);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .project-card {
+      background: var(--card-bg);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .project-card:hover {
+      background: var(--card-hover);
+      border-left-color: var(--accent);
+    }
+    .proj-name {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .proj-desc {
+      font-size: 0.875rem;
+      color: var(--text-sub);
+      line-height: 1.65;
+    }
+    .proj-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .lang-badge { display: flex; align-items: center; gap: 6px; }
+    .lang-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .lang-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .github-icon {
+      color: var(--text-muted);
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+    .project-card:hover .github-icon { color: var(--accent); }
+
+    /* ── DIVIDER ── */
+    .divider { height: 0.5px; background: var(--border-sub); margin: 0 2.5rem; }
+
+    /* ── ABOUT ── */
+    .about { padding: 2.5rem 2.5rem 4rem; }
+    .about-text {
+      font-size: 0.9375rem;
+      color: var(--text-sub);
+      line-height: 1.9;
+      max-width: 560px;
+    }
+    .contact-row { display: flex; gap: 10px; margin-top: 1.75rem; flex-wrap: wrap; }
+    .contact-btn {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 0.5px solid var(--chip-border);
+      color: var(--chip-text);
+      background: var(--chip-bg);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.18s, border-color 0.18s;
+      cursor: pointer;
+    }
+    .contact-btn:hover {
+      background: #daecd6;
+      border-color: #8aba84;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .hero, .section, .about { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- HERO -->
+    <div class="hero">
+      <p class="hero-tag">Software Engineer</p>
+      <h1 class="hero-name">Kuru<span>99</span></h1>
+      <p class="hero-desc">バックエンドエンジニアを目指して勉強中．</p>
+      <div class="chips">
+        <span class="chip">C</span>
+        <span class="chip">Go</span>
+        <span class="chip">Java</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">Docker</span>
+        <span class="chip">Android</span>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="section">
+      <p class="section-label">Projects</p>
+      <div class="projects">
+
+        <a class="project-card" href="https://github.com/Kuru99/SharedWhiteboard" target="_blank" rel="noopener">
+          <div>
+            <p class="proj-name">SharedWhiteboard</p>
+            <p class="proj-desc">GoとDockerを使ったリアルタイム同期ホワイトボードWebアプリ．描画の遅延を抑えるよう工夫しました．</p>
+          </div>
+          <div class="proj-right">
+            <div class="lang-badge">
+              <span class="lang-dot" style="background:#3178c6"></span>
+              <span class="lang-label">TypeScript</span>
+            </div>
+            <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </div>
+        </a>
+
+        <a class="project-card" href="https://github.com/Kuru99/task-api" target="_blank" rel="noopener">
+          <div>
+            <p class="proj-name">task-api</p>
+            <p class="proj-desc">GoとDockerの学習を目的に作ったタスク管理REST API．</p>
+          </div>
+          <div class="proj-right">
+            <div class="lang-badge">
+              <span class="lang-dot" style="background:#00acd7"></span>
+              <span class="lang-label">Go</span>
+            </div>
+            <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </div>
+        </a>
+
+        <a class="project-card" href="https://github.com/Kuru99/NoiseAnalyzer" target="_blank" rel="noopener">
+          <div>
+            <p class="proj-name">NoiseAnalyzer</p>
+            <p class="proj-desc">賃貸の騒音問題をきっかけに開発したAndroidアプリ．AIを使って音源の推定と分析を行います．</p>
+          </div>
+          <div class="proj-right">
+            <div class="lang-badge">
+              <span class="lang-dot" style="background:#b07219"></span>
+              <span class="lang-label">Java</span>
+            </div>
+            <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ABOUT -->
+    <div class="about">
+      <p class="section-label">About</p>
+      <p class="about-text">
+        高専でC言語を通じてプログラミングの基礎を学び，現在はバックエンドエンジニアを目指して勉強中です．日常で感じた不便さをきっかけにアプリを作り始めるなど，「使いたいものを自分で作ってみる」というスタンスで開発に取り組んでいます．生成AIを活用しながらJavaやGoなどの複数の言語で開発してきました．今後はバックエンドやサーバー・インフラまわりの知識を身につけていきたいと考えています．
+      </p>
+      <div class="contact-row">
+        <a class="contact-btn" href="https://github.com/Kuru99" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
